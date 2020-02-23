@@ -11,6 +11,7 @@
 		<script src="js/three.js"></script>
 		<script>
 			var renderer, scene, camera;
+			var boundaries;
 
 			init();
 			animate();
@@ -47,7 +48,12 @@
 					var meshMaterial = new THREE.MeshBasicMaterial( {color: 0x7FD8E2} );
 					var mesh = new THREE.Mesh( meshGeometry, meshMaterial );
 					mesh.matrixAutoUpdate = false;
-					scene.add( mesh );
+					scene.add(mesh);
+
+					//Plane boundaries (do not cross)
+       		boundaries=new THREE.Box3(new THREE.Vector3(-22.5,0, -22.5), new THREE.Vector3(22.5, 0, 22.5));
+
+
 
 			}
 
