@@ -9,9 +9,11 @@
 	</head>
 	<body>
 		<script src="js/three.js"></script>
+		<script src="src/gameEntity.js"></script>
 		<script>
 			var renderer, scene, camera;
 			var boundaries;
+			var entity;
 
 			init();
 			animate();
@@ -44,15 +46,16 @@
 					//Mesh
 					var meshGeometry = new THREE.ConeBufferGeometry(0.4, 1.25, 10 );
 					meshGeometry.rotateX( Math.PI * 0.5 );
-					meshGeometry.computeBoundingSphere();
 					var meshMaterial = new THREE.MeshBasicMaterial( {color: 0x7FD8E2} );
 					var mesh = new THREE.Mesh( meshGeometry, meshMaterial );
-					mesh.matrixAutoUpdate = false;
-					scene.add(mesh);
+
+					//Entity
+					entity = new SteeringEntity(mesh);
+					entity.position.set(Math.random() * (20) + (-10) ,0,Math.random() * (20) + (-10));
+					scene.add(entity);
 
 					//Plane boundaries (do not cross)
        		boundaries=new THREE.Box3(new THREE.Vector3(-22.5,0, -22.5), new THREE.Vector3(22.5, 0, 22.5));
-
 
 
 			}

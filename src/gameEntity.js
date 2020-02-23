@@ -8,6 +8,8 @@ Entity = function (mesh) {
     this.position = new THREE.Vector3(0,0,0);
     this.velocity = new THREE.Vector3(0,0,0);
 
+    this.add(this.mesh);
+
 }
 
 Entity.prototype = Object.assign(Object.create(THREE.Group.prototype), {
