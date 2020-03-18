@@ -72,6 +72,8 @@
 			function animate()  {
         	requestAnimationFrame(animate);
 					controls.update();
+					entity.arrive(ball.position);
+					entity.update();
         	renderer.render(scene, camera);
     	}
 
