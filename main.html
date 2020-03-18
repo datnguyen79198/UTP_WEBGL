@@ -9,9 +9,11 @@
 	</head>
 	<body>
 		<script src="js/three.js"></script>
+		<script src="js/controls/orbitControls.js"></script>
 		<script src="src/gameEntity.js"></script>
 		<script>
 			var renderer, scene, camera;
+			var controls;
 			var boundaries;
 			var entity;
 
@@ -20,7 +22,7 @@
 
 			function init() {
 					scene = new THREE.Scene();
-					camera = new THREE.PerspectiveCamera( 40, window.innerWidth/window.innerHeight, 0.1, 1000 );
+					camera = new THREE.PerspectiveCamera( 15, window.innerWidth/window.innerHeight, 0.1, 1000 );
 
 					renderer = new THREE.WebGLRenderer();
 					renderer.setSize( window.innerWidth, window.innerHeight );
@@ -28,6 +30,13 @@
 
 					camera.position.set(30, 25, 0);
        		camera.lookAt(scene.position);
+
+					//orbit control
+
+					controls = new THREE.OrbitControls(camera,renderer.domElement);
+					controls.maxPolarAngle = Math.PI * 0.5;
+					controls.minDistance = 100;
+					controls.maxDistance - 30000;
 
 					//floor
 					var floorGeometry=new THREE.PlaneGeometry(25,25, 32 );
@@ -62,6 +71,7 @@
 
 			function animate()  {
         	requestAnimationFrame(animate);
+					controls.update();
         	renderer.render(scene, camera);
     	}
 

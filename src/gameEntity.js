@@ -18,7 +18,7 @@ Entity.prototype = Object.assign(Object.create(THREE.Group.prototype), {
     update: function () {
         this.velocity.clampLength(0,this.maxSpeed);
         this.velocity.setY(0);
-        this.position+=this.velocity;
+        this.position+=this.velocity; //physical movement
     }
 });
 
