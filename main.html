@@ -16,6 +16,7 @@
 			var controls;
 			var boundaries;
 			var entity;
+			var target;
 
 			init();
 			animate();
@@ -48,9 +49,9 @@
 					//Ball
        		var ballGeometry=new THREE.SphereGeometry(0.3, 1.2, 8);
        		var ballMaterial=new THREE.MeshBasicMaterial({color: 0xBCFF00});
-       		ball=new THREE.Mesh( ballGeometry, ballMaterial );
-       		ball.position.set(Math.random() * (20) + (-10) ,0,Math.random() * (20) + (-10));
-       		scene.add(ball);
+       		target=new THREE.Mesh( ballGeometry, ballMaterial );
+       		target.position.set(Math.random() * (20) + (-10) ,0,Math.random() * (20) + (-10));
+       		scene.add(target);
 
 					//Mesh
 					var meshGeometry = new THREE.ConeBufferGeometry(0.4, 1.25, 10 );
@@ -72,7 +73,7 @@
 			function animate()  {
         	requestAnimationFrame(animate);
 					controls.update();
-					entity.arrive(ball.position);
+					entity.arrive(target.position);
 					entity.update();
         	renderer.render(scene, camera);
     	}
