@@ -7,6 +7,8 @@ Entity = function (mesh) {
     this.maxSpeed = 5;
     this.position = new THREE.Vector3(0,0,0);
     this.velocity = new THREE.Vector3(0,0,0);
+    this.velocitySamples = []
+    this.numSamplesForSmoothing = 20
 
     this.add(this.mesh);
 
@@ -14,6 +16,23 @@ Entity = function (mesh) {
 
 Entity.prototype = Object.assign(Object.create(THREE.Group.prototype), {
     constructor: Entity,
+
+    lookWhereGoing: function (smoothing) {
+        var direction = this.position.clone().add(this.velocity).setY(this.position.y)
+        if (smoothing) {
+            if (this.velocitySamples.length == this.numSamplesForSmoothing) {
+                this.velocitySamples.shift();
+            }
+            this.velocitySamples.push(this.velocity.clone().setY(this.position.y));
+            direction.set(0, 0, 0);
+            for (var v = 0; v < this.velocitySamples.length; v++) {
+                direction.add(this.velocitySamples[v])
+            }
+            direction.divideScalar(this.velocitySamples.length)
+            direction = this.position.clone().add(direction).setY(this.position.y)
+        }
+        this.lookAt(direction)
+    },
 
     update: function () {
         this.velocity.clampLength(0,this.maxSpeed);
