@@ -52,6 +52,13 @@
 					var meshMaterial = new THREE.MeshBasicMaterial( {color: 0x7FD8E2} );
 					var mesh = new THREE.Mesh( meshGeometry, meshMaterial );
 
+					//target
+					var ballGeometry=new THREE.SphereGeometry(0.3, 1.2, 8);
+					var ballMaterial=new THREE.MeshBasicMaterial({color: 0xBCFF00});
+					target=new THREE.Mesh( ballGeometry, ballMaterial );
+					target.position.set(Math.random() * (20) + (-10) ,0,Math.random() * (20) + (-10));
+					scene.add(target);
+
 					//Entity
 					entity = new SteeringEntity(mesh);
 					entity.position.set(Math.random() * (20) + (-10) ,0,Math.random() * (20) + (-10));
@@ -65,14 +72,8 @@
 			}
 
 			function generateTarget() {
-
-					var ballGeometry=new THREE.SphereGeometry(0.3, 1.2, 8);
-					var ballMaterial=new THREE.MeshBasicMaterial({color: 0xBCFF00});
-					target=new THREE.Mesh( ballGeometry, ballMaterial );
 					target.position.set(Math.random() * (20) + (-10) ,0,Math.random() * (20) + (-10));
-					scene.add(target);
-
-					setTimeout(generateTarget,6000);
+					setTimeout(generateTarget,5000);
 			}
 
 			function animate()  {
