@@ -46,13 +46,6 @@
       		floor.rotation.x=-Math.PI*.5;
       		scene.add(floor);
 
-					//Ball
-       		var ballGeometry=new THREE.SphereGeometry(0.3, 1.2, 8);
-       		var ballMaterial=new THREE.MeshBasicMaterial({color: 0xBCFF00});
-       		target=new THREE.Mesh( ballGeometry, ballMaterial );
-       		target.position.set(Math.random() * (20) + (-10) ,0,Math.random() * (20) + (-10));
-       		scene.add(target);
-
 					//Mesh
 					var meshGeometry = new THREE.ConeBufferGeometry(0.4, 1.25, 10 );
 					meshGeometry.rotateX( Math.PI * 0.5 );
@@ -67,13 +60,25 @@
 					//Plane boundaries (do not cross)
        		boundaries=new THREE.Box3(new THREE.Vector3(-22.5,0, -22.5), new THREE.Vector3(22.5, 0, 22.5));
 
+					//target
+					generateTarget();
+			}
 
+			function generateTarget() {
+
+					var ballGeometry=new THREE.SphereGeometry(0.3, 1.2, 8);
+					var ballMaterial=new THREE.MeshBasicMaterial({color: 0xBCFF00});
+					target=new THREE.Mesh( ballGeometry, ballMaterial );
+					target.position.set(Math.random() * (20) + (-10) ,0,Math.random() * (20) + (-10));
+					scene.add(target);
+
+					setTimeout(generateTarget,6000);
 			}
 
 			function animate()  {
         	requestAnimationFrame(animate);
 					controls.update();
-					entity.arrive(target.position);
+					entity.arrive(target.position); //arrive if need
 					entity.update();
         	renderer.render(scene, camera);
     	}

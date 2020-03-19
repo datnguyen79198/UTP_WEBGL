@@ -4,7 +4,7 @@ Entity = function (mesh) {
     //attributes
     this.mesh = mesh;
     this.mass = 1;
-    this.maxSpeed = 4;
+    this.maxSpeed = 5;
     this.position = new THREE.Vector3(0,0,0);
     this.velocity = new THREE.Vector3(0,0,0);
 
@@ -32,6 +32,12 @@ SteeringEntity = function(mesh) {
 
 SteeringEntity.prototype = Object.assign(Object.create(Entity.prototype), {
     constructor: SteeringEntity,
+
+    seek: function (position) {
+        var desiredVelocity = position.clone().sub(this.position);
+        desiredVelocity.normalize().setLength(this.maxSpeed).sub(this.velocity);
+        this.steeringForce.add(desiredVelocity);
+    },
 
     arrive: function(position /*target*/) {
         var desiredVelocity = position.clone().sub(this.position);
