@@ -17,7 +17,7 @@
 			var boundaries;
 			var entity;
 			var target;
-			var obstacles;
+			var obstacles = new Array();
 
 			var floorSize = 40;
 
@@ -77,8 +77,11 @@
 							let obsI = new THREE.Mesh(obGeometry, obMaterial);
 							let a = (-floorSize/2) + (floorSize/7) * i + 1;
 							let b = a + (floorSize/7) - 1;
-							obsI.position.set(Math.random() * (floorSize) + (-floorSize/2),1.5,Math.random() * (b-a) + a);
-							scene.add(obsI);
+
+							let entityObs = new Entity(obsI);
+							entityObs.position.set(Math.random() * (floorSize) + (-floorSize/2),1.5,Math.random() * (b-a) + a);
+							scene.add(entityObs);
+							obstacles.push(entityObs);
 					}
 			}
 
