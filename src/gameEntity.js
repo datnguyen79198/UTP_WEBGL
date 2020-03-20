@@ -7,8 +7,6 @@ Entity = function (mesh) {
     this.maxSpeed = 2.5;
     this.position = new THREE.Vector3(0,0,0);
     this.velocity = new THREE.Vector3(0,0,0);
-    this.velocitySamples = []
-    this.numSamplesForSmoothing = 20
 
     this.add(this.mesh);
 
