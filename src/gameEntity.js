@@ -4,7 +4,7 @@ Entity = function (mesh) {
     //attributes
     this.mesh = mesh;
     this.mass = 1;
-    this.maxSpeed = 5;
+    this.maxSpeed = 2.5;
     this.position = new THREE.Vector3(0,0,0);
     this.velocity = new THREE.Vector3(0,0,0);
     this.velocitySamples = []
