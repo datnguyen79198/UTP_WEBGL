@@ -75,11 +75,13 @@
 					var obMaterial = new THREE.MeshBasicMaterial({ color: 0xffb41c });
 					for (let i=0;i<7;i++) {
 							let obsI = new THREE.Mesh(obGeometry, obMaterial);
+							obGeometry.computeBoundingSphere();
 							let a = (-floorSize/2) + (floorSize/7) * i + 1;
 							let b = a + (floorSize/7) - 1;
 
 							let entityObs = new Entity(obsI);
 							entityObs.position.set(Math.random() * (floorSize) + (-floorSize/2),1.5,Math.random() * (b-a) + a);
+							entity.boundingRadius = obGeometry.boundingSphere.radius;
 							scene.add(entityObs);
 							obstacles.push(entityObs);
 					}
