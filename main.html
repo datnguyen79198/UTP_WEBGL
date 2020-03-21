@@ -22,6 +22,7 @@
 			var floorSize = 40;
 
 			init();
+			document.addEventListener('mousedown',onClick,true);
 			animate();
 
 			function init() {
@@ -87,8 +88,16 @@
 					}
 			}
 
-			function generateTarget() {
-					target.position.set(Math.random() * (floorSize) + (-floorSize/2) ,0,Math.random() * (floorSize) + (-floorSize/2));
+			function onClick(event) {
+					if (event.ctrlKey) {
+						var mouse3D = new THREE.Vector3(( event.clientX / window.innerWidth ) * 2 - 1, -( event.clientY / window.innerHeight ) * 2 + 1, 0);
+						var raycaster = new THREE.Raycaster();
+						raycaster.setFromCamera(mouse3D, camera);
+						var intersects = raycaster.intersectObjects(scene.children);
+						if (intersects.length > 0) {
+								target.position.set(intersects[0].point.x, 0, intersects[0].point.z)
+						}
+					}
 			}
 
 			function animate()  {
@@ -97,7 +106,7 @@
 					entity.arrive(target.position); //arrive if need
 					entity.lookWhereGoing();
 					entity.update();
-					if (entity.position.distanceTo(target.position) < 0.5) generateTarget();
+					//if (entity.position.distanceTo(target.position) < 0.5) generateTarget();
         	renderer.render(scene, camera);
     	}
 

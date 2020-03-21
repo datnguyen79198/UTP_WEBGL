@@ -4,7 +4,7 @@ Entity = function (mesh) {
     //attributes
     this.mesh = mesh;
     this.mass = 1;
-    this.maxSpeed = 2.5;
+    this.maxSpeed = 4;
     this.boundingRadius = 0;
     this.position = new THREE.Vector3(0,0,0);
     this.velocity = new THREE.Vector3(0,0,0);
@@ -31,7 +31,7 @@ Entity.prototype = Object.assign(Object.create(THREE.Group.prototype), {
 
 SteeringEntity = function(mesh) {
     Entity.call(this,mesh);
-    this.maxForce = 5;
+    this.maxForce = 4;
     this.arrivalThreshold = 400; //slowing distance
     this.steeringForce = new THREE.Vector3(0,0,0);
 }
